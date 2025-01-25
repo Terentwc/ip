@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Krunch {
     public static void main(String[] args) {
+        // Scanner for user stuff
         Scanner scanner = new Scanner(System.in);
 
         //Greet
@@ -11,6 +13,9 @@ public class Krunch {
         System.out.println("Name's Krunch. So, what mighty task are we tackling today?");
         System.out.println("_____________________________________________________________________________");
 
+        // created a task list
+        ArrayList<String> tasks = new ArrayList<>();
+
         while(true) {
             String UserInput = scanner.nextLine();
 
@@ -18,17 +23,16 @@ public class Krunch {
                 System.out.println("Oh, I see how it is. No need to pretend you’ll miss me. Go on, then. Goodbye.");
                 System.out.println("_____________________________________________________________________________");
                 break;
+            } else if(UserInput.equals("list")) {
+                for (int i = 1; i <= tasks.size() ; i++ ) {
+                    System.out.println(i + ". " + tasks.get(i - 1));
+                }
             } else {
-                System.out.println(UserInput);
+                // adding
+                System.out.println("added: " + UserInput);
+                tasks.add(UserInput);
             }
         }
-
-
-
-        //Bye
-//        System.out.println("Bye. Hope to see you again soon!");
-//        System.out.println("________________________________");
-//        System.exit(0);
 
     }
 }
