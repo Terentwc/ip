@@ -182,7 +182,35 @@ public class Krunch {
                 } catch (IllegalException e) {
                     System.out.println(e.getMessage());
                 }
-            } else { //echoing if anything else as an error message
+            } else if (words[0].equals("delete")) {
+                try {
+                    if (tasks.isEmpty()) {
+                        throw new IllegalException("Oh... And what do you want to delete? My memory is empty.\n" +
+                                "Psst! Make a task first! Don't tell anyone I told you this!");
+                    }
+                    if (words.length < 2) {
+                        throw new IllegalException("Alright. What task do you want to delete?\n" +
+                                "Come on, do it like this. delete (task number). It's just that easy");
+                    }
+                    int num = Integer.parseInt(words[1]) - 1;
+                    if (num >= tasks.size()) {
+                        throw new IllegalException("Deleting!... Deleted!! What did I delete? The imaginary task of course!");
+                    }
+                    // Deleting the task
+                    Task removedTask = tasks.remove(num);
+                    System.out.println("Task deleted: " + removedTask);
+                    if (tasks.isEmpty()) {
+                        System.out.println("You now have 0 tasks left.\n" +
+                                "Thank you for deleting parts of my memory. It sure feels nice to remember nothing.");
+                    } else {
+                        System.out.println("You now have " + tasks.size() + " tasks left.\n" +
+                                "Thank you for deleting parts of my memory. It sure feels nice to remember lesser things.");
+                    }
+                } catch (IllegalException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            else { //echoing if anything else as an error message
                 System.out.println(UserInput + "! smartass.");
             }
         }
