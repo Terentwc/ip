@@ -1,0 +1,11 @@
+todo Buy Groceries
+list
+mark 1
+list
+unmark 1
+deadline Sell Groceries /by idk what time yet
+list
+event Scam Con artists /from Sunesday 1am /to 5pm
+mark 3
+list
+bye
