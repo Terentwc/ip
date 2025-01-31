@@ -101,7 +101,7 @@ public class Krunch {
             // to do part
             } else if (words[0].contains("todo")) {
                 try {
-                    if (words[1].isEmpty()) {
+                    if (words.length < 2) {
                         throw new IllegalException("Hey hey, tli man... Give me something to work with.");
                     }
                     System.out.println("It is added... anything else?");
@@ -210,8 +210,10 @@ public class Krunch {
                     System.out.println(e.getMessage());
                 }
             }
-            else { //echoing if anything else as an error message
-                System.out.println(UserInput + "! smartass.");
+            else if (words[0].isEmpty()) {
+                System.out.println("W-wha?... h-hey! Don't give me the silent treatment!");
+            } else { //echoing if anything else as an error message
+                    System.out.println(UserInput + "! smartass.");
             }
         }
 
