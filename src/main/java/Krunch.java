@@ -3,20 +3,66 @@ import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Krunch {
+    // Saves task
     public static void saveTasks(ArrayList<Task> tasks) {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.txt"))) {
             for (Task task : tasks) {
-                writer.write(task.toString());
+                if (task instanceof ToDo) {
+                    writer.write("T | " + (task.isDone() ? "1" : "0") + " | "
+                            + task.getTask());
+                } else if (task instanceof Deadline) {
+                    writer.write("D | " + (task.isDone() ? "1" : "0") + " | "
+                            + task.getTask() + " | " + ((Deadline) task).by);
+                } else if (task instanceof Event) {
+                    writer.write("E | " + (task.isDone() ? "1" : "0") + " | "
+                            + task.getTask() + " | " + ((Event) task).from + " | " + ((Event) task).to);
+                }
                 writer.newLine();
             }
-            System.out.println("Tasks saved");
         } catch (IOException e) {
-            System.out.println("Error saving");
+            System.out.println("Error saving tasks");
         }
     }
 
+    // Loads Tasks
+    public static ArrayList<Task> loadTasks() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("tasks.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" \\| "); // Split by " | "
+                String type = parts[0];
+                boolean isDone = parts[1].equals("1");
+                String taskName = parts[2];
+
+                Task task;
+                if (type.equals("T")) {
+                    task = new ToDo(taskName);
+                } else if (type.equals("D")) {
+                    task = new Deadline(taskName, parts[3]);
+                } else if (type.equals("E")) {
+                    task = new Event(taskName, parts[3], parts[4]);
+                } else {
+                    continue; // Skip invalid lines
+                }
+                // Restore task completion status
+                if (isDone) {
+                    task.toggleDone();
+                }
+                tasks.add(task);
+            }
+        } catch (IOException e) {
+            return tasks;
+        }
+        return tasks;
+    }
+
+
+    // Main
     public static void main(String[] args) {
         // Scanner for user stuff
         Scanner scanner = new Scanner(System.in);
@@ -29,13 +75,14 @@ public class Krunch {
         System.out.println("_____________________________________________________________________________");
 
         // created a task list
-        ArrayList<Task> tasks = new ArrayList<>();
+        //ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = loadTasks();
 
         //first pass
         boolean isFirst = true;
 
         while(true) {
-            if (isFirst == false) {
+            if (!isFirst) {
                 saveTasks(tasks);
             }
             isFirst = false;
