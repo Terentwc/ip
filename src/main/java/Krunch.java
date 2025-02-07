@@ -1,7 +1,22 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Krunch {
+    public static void saveTasks(ArrayList<Task> tasks) {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.txt"))) {
+            for (Task task : tasks) {
+                writer.write(task.toString());
+                writer.newLine();
+            }
+            System.out.println("Tasks saved");
+        } catch (IOException e) {
+            System.out.println("Error saving");
+        }
+    }
+
     public static void main(String[] args) {
         // Scanner for user stuff
         Scanner scanner = new Scanner(System.in);
@@ -16,7 +31,14 @@ public class Krunch {
         // created a task list
         ArrayList<Task> tasks = new ArrayList<>();
 
+        //first pass
+        boolean isFirst = true;
+
         while(true) {
+            if (isFirst == false) {
+                saveTasks(tasks);
+            }
+            isFirst = false;
             String UserInput = scanner.nextLine();
             // splitting up words here [0] = task [1]++ = descriptions
             String[] words = UserInput.split(" ");
@@ -40,7 +62,7 @@ public class Krunch {
                     System.out.println(e.getMessage());
                 }
             // unmarkng a task
-            } else if (words[0].contains("unmark")){
+            } else if (words[0].contains("unmark")) {
                 // unmark (num)  <- -1
                 try {
                     if (tasks.isEmpty()) {
@@ -159,7 +181,7 @@ public class Krunch {
                     String[] parts = UserInput.split("/from"); // first split parts
                     // event description
                     String description = parts[0].substring(words[0].length()).trim();
-                    if (description.isEmpty()){
+                    if (description.isEmpty()) {
                         throw new IllegalException("Hey smarty pants... Where's the description?");
                     }
                     //timeframe from
