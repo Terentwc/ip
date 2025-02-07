@@ -74,6 +74,12 @@ public class Krunch {
         System.out.println("Name's Krunch. So, what mighty task are we tackling today?");
         System.out.println("_____________________________________________________________________________");
 
+        // Will delete after making deadline and event flexible
+        // Still thinking on how to do
+        System.out.println("By the way, event and deadline requires a format of yyyy-mm-dd");
+        System.out.println("I'll be unhappy and leave if you give it to me any other way!");
+        System.out.println("_____________________________________________________________________________");
+
         // created a task list
         //ArrayList<Task> tasks = new ArrayList<>();
         ArrayList<Task> tasks = loadTasks();
