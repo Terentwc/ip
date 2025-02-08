@@ -1,67 +1,15 @@
+package Krunch;
+
+import Krunch.exceptions.IllegalException;
+import Krunch.task.Deadline;
+import Krunch.task.Event;
+import Krunch.task.Task;
+import Krunch.task.ToDo;
+
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 public class Krunch {
-    // Saves task
-    public static void saveTasks(ArrayList<Task> tasks) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.txt"))) {
-            for (Task task : tasks) {
-                if (task instanceof ToDo) {
-                    writer.write("T | " + (task.isDone() ? "1" : "0") + " | "
-                            + task.getTask());
-                } else if (task instanceof Deadline) {
-                    writer.write("D | " + (task.isDone() ? "1" : "0") + " | "
-                            + task.getTask() + " | " + ((Deadline) task).by);
-                } else if (task instanceof Event) {
-                    writer.write("E | " + (task.isDone() ? "1" : "0") + " | "
-                            + task.getTask() + " | " + ((Event) task).from + " | " + ((Event) task).to);
-                }
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("Error saving tasks");
-        }
-    }
-
-    // Loads Tasks
-    public static ArrayList<Task> loadTasks() {
-        ArrayList<Task> tasks = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("tasks.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(" \\| "); // Split by " | "
-                String type = parts[0];
-                boolean isDone = parts[1].equals("1");
-                String taskName = parts[2];
-
-                Task task;
-                if (type.equals("T")) {
-                    task = new ToDo(taskName);
-                } else if (type.equals("D")) {
-                    task = new Deadline(taskName, parts[3]);
-                } else if (type.equals("E")) {
-                    task = new Event(taskName, parts[3], parts[4]);
-                } else {
-                    continue; // Skip invalid lines
-                }
-                // Restore task completion status
-                if (isDone) {
-                    task.toggleDone();
-                }
-                tasks.add(task);
-            }
-        } catch (IOException e) {
-            return tasks;
-        }
-        return tasks;
-    }
-
-
     // Main
     public static void main(String[] args) {
         // Scanner for user stuff
@@ -82,25 +30,25 @@ public class Krunch {
 
         // created a task list
         //ArrayList<Task> tasks = new ArrayList<>();
-        ArrayList<Task> tasks = loadTasks();
-
+        ArrayList<Task> tasks = TaskLoader.loadTasks();
+        new TaskManager(tasks);
         //first pass
         boolean isFirst = true;
 
         while(true) {
             if (!isFirst) {
-                saveTasks(tasks);
+                TaskSaver.saveTasks(tasks);
             }
             isFirst = false;
             String UserInput = scanner.nextLine();
             // splitting up words here [0] = task [1]++ = descriptions
             String[] words = UserInput.split(" ");
-            if (words[0].equalsIgnoreCase("bye")) {
+            if (words[0].equalsIgnoreCase("bye") && words.length == 1) {
                 System.out.println("Oh, I see how it is. No need to pretend you’ll miss me. Go on, then. Goodbye.");
                 System.out.println("_____________________________________________________________________________");
                 break;
             // printing out the list
-            } else if (words[0].equals("list")) {
+            } else if (words[0].equals("list") && words.length == 1) {
                 try {
                     if (tasks.isEmpty()) {
                         throw new IllegalException("Oh you ain't getting me this time!\n" +

@@ -1,3 +1,5 @@
+package Krunch.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -20,5 +22,13 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return "[E]" + super.toString() + " (from: " + from.format(formatter) + " to: " + to.format(formatter) + ")";
+    }
+
+    public LocalDate getFrom() {
+        return this.from;
+    }
+
+    public LocalDate getTo() {
+        return this.to;
     }
 }

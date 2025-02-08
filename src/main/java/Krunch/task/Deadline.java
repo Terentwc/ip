@@ -1,3 +1,5 @@
+package Krunch.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -19,5 +21,9 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
+    }
+
+    public LocalDate getBy() {
+        return this.by;
     }
 }
