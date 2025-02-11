@@ -3,9 +3,9 @@ package Krunch;
 import Krunch.exceptions.IllegalException;
 
 public class Krunch {
-    private TaskManager taskManager;
-    private UI ui;
-    private Parser parser;
+    private final TaskManager taskManager;
+    private final UI ui;
+    private final Parser parser;
 
 
     public Krunch() {
@@ -14,9 +14,15 @@ public class Krunch {
         parser = new Parser();
     }
 
+    // Main
+    public static void main(String[] args) throws IllegalException {
+
+        new Krunch().run();
+    }
+
     public void run() throws IllegalException {
         ui.greet();
-        while(true) {
+        while (true) {
             try {
                 String UserInput = ui.nextCommand();
                 String[] parsedInput = parser.parsedInfo(UserInput);
@@ -28,11 +34,5 @@ public class Krunch {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    // Main
-    public static void main(String[] args) throws IllegalException {
-
-        new Krunch().run();
     }
 }

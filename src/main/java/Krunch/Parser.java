@@ -39,7 +39,7 @@ public class Parser {
         }
     }
 
-    private void byeMessage (String[] words) {
+    private void byeMessage(String[] words) {
         if (words.length == 1) {
             ui.showMessage("Oh, I see how it is. No need to pretend you’ll miss me. Go on, then. Goodbye.");
             ui.showMessage("_____________________________________________________________________________");
@@ -49,7 +49,7 @@ public class Parser {
         }
     }
 
-    private String[] listMessage (String[] words) throws IllegalException {
+    private String[] listMessage(String[] words) throws IllegalException {
         if (words.length == 1) {
             // return "list"
             return words;
@@ -58,7 +58,7 @@ public class Parser {
         }
     }
 
-    private String[] parseMark (String[] words) throws IllegalException {
+    private String[] parseMark(String[] words) throws IllegalException {
         String word = words[0];
         if (words.length != 2) {
             throw new IllegalException("Alright. It is" + word + "ed... What did you want to " + word + " exactly?\n"
@@ -75,14 +75,14 @@ public class Parser {
         }
     }
 
-    private String[] parseToDo (String[] words) throws IllegalException {
+    private String[] parseToDo(String[] words) throws IllegalException {
         if (words.length < 2) {
             throw new IllegalException("Hey hey, tli man... Give me something to work with.");
         }
         return words;
     }
 
-    private String[] parseDeadline (String[] words, String UserInput) throws IllegalException {
+    private String[] parseDeadline(String[] words, String UserInput) throws IllegalException {
         if (words.length < 2) {
             throw new IllegalException("Yes...? You seem to be missing... a description.\n"
                     + " And a /by along with a date. But you are smart, you probably did this to test me... Right?");
@@ -104,7 +104,7 @@ public class Parser {
         return words;
     }
 
-    private String[] parseEvent (String[] words, String UserInput) throws IllegalException {
+    private String[] parseEvent(String[] words, String UserInput) throws IllegalException {
 
         if (words.length <= 1) {
             throw new IllegalException("Hey hey, tli man... Give me something to work with.");

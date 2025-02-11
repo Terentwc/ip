@@ -1,9 +1,9 @@
 package Krunch;
 
+import Krunch.exceptions.IllegalException;
 import Krunch.task.Deadline;
 import Krunch.task.Event;
 import Krunch.task.Task;
-import Krunch.exceptions.IllegalException;
 import Krunch.task.ToDo;
 
 import java.util.ArrayList;
@@ -17,8 +17,8 @@ public class TaskManager {
         this.tasks = tasks;
     }
 
-    public void doTask(String[] words, String UserInput) throws IllegalException{
-        switch(words[0]) {
+    public void doTask(String[] words, String UserInput) throws IllegalException {
+        switch (words[0]) {
             case "list":
                 getList();
                 break;
@@ -52,41 +52,41 @@ public class TaskManager {
         }
     }
 
-    public void editMark (String stringNumber, boolean shouldMark) throws IllegalException {
+    public void editMark(String stringNumber, boolean shouldMark) throws IllegalException {
         int listNumber = Integer.parseInt(stringNumber);
-            if (tasks.isEmpty()) {
-                throw new IllegalException("Oh you ain't getting me this time!\n" +
-                        "Psst! Make a task first! Don't tell anyone I told you this!");
+        if (tasks.isEmpty()) {
+            throw new IllegalException("Oh you ain't getting me this time!\n" +
+                    "Psst! Make a task first! Don't tell anyone I told you this!");
+        }
+        if (listNumber >= tasks.size()) {
+            if (shouldMark) {
+                throw new IllegalException("Marking imaginary task as done! Aren't I sooo... helpful?");
+            } else {
+                throw new IllegalException("You couldn't even do an imaginary task? Quickly! Start on it!");
             }
-            if (listNumber >= tasks.size()) {
-                if (shouldMark){
-                    throw new IllegalException("Marking imaginary task as done! Aren't I sooo... helpful?");
-                } else {
-                    throw new IllegalException("You couldn't even do an imaginary task? Quickly! Start on it!");
-                }
+        }
+        // checking if it is not done
+        if (!tasks.get(listNumber).isDone()) {
+            if (!shouldMark) {
+                throw new IllegalException("So... when are you going to start exactly?");
+            } else {
+                ui.showMessage("Yes yes... very well done.");
             }
-            // checking if it is not done
-            if (!tasks.get(listNumber).isDone()) {
-                if (!shouldMark) {
-                    throw new IllegalException ("So... when are you going to start exactly?");
-                } else {
-                    ui.showMessage("Yes yes... very well done.");
-                }
-            } else { //changing to unmarked
-                ui.showMessage("Hm... alright. It is unmarked.");
-                tasks.get(listNumber).toggleDone();
-            }
-            // printing status
-            ui.showMessage(tasks.get(listNumber).toString());
+        } else { //changing to unmarked
+            ui.showMessage("Hm... alright. It is unmarked.");
+            tasks.get(listNumber).toggleDone();
+        }
+        // printing status
+        ui.showMessage(tasks.get(listNumber).toString());
     }
 
-    private void addToDo (String description) {
+    private void addToDo(String description) {
         Task addend = new ToDo(description);
         tasks.add(addend);
         ui.addedAcknowledgement(addend, tasks.size());
     }
 
-    private void addDeadline (String[] words, String UserInput) {
+    private void addDeadline(String[] words, String UserInput) {
         String[] parts = UserInput.split("/by");
         String description = parts[0].substring(words[0].length()).trim();
         String timeframe = parts[1].trim();
@@ -95,7 +95,7 @@ public class TaskManager {
         ui.addedAcknowledgement(addend, tasks.size());
     }
 
-    private void addEvent (String[] words, String UserInput) {
+    private void addEvent(String[] words, String UserInput) {
         String[] parts = UserInput.split("/from"); // first split parts
         // event description
         String description = parts[0].substring(words[0].length()).trim();

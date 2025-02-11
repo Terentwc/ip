@@ -5,7 +5,7 @@ public class Task {
     protected boolean done;
 
     // initialing task as not done
-    public Task (String task) {
+    public Task(String task) {
         this.task = task;
         this.done = false;
     }
@@ -21,7 +21,7 @@ public class Task {
     }
 
     // check to see if done or not
-    public boolean isDone () {
+    public boolean isDone() {
         return this.done;
     }
 

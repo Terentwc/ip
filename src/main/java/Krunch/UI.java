@@ -25,11 +25,11 @@ public class UI {
         return scanner.nextLine();
     }
 
-    public void showMessage (String message) {
+    public void showMessage(String message) {
         System.out.println(message);
     }
 
-    public void addedAcknowledgement (Task added, int size) {
+    public void addedAcknowledgement(Task added, int size) {
         System.out.println("It is added... anything else?");
         System.out.println(added);
         System.out.println("In case you wanted to know, you have " + size + " tasks in the list.");

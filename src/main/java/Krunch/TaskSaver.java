@@ -5,10 +5,10 @@ import Krunch.task.Event;
 import Krunch.task.Task;
 import Krunch.task.ToDo;
 
-import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TaskSaver {
     private static final String FILE_NAME = "tasks.txt";
@@ -26,7 +26,7 @@ public class TaskSaver {
         }
     }
 
-    public static String taskToString (Task task) {
+    public static String taskToString(Task task) {
         if (task instanceof ToDo) {
             return "T | " + (task.isDone() ? "1" : "0") + " | " + task.getTask();
         } else if (task instanceof Deadline) {
