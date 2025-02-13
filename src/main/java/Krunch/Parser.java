@@ -41,7 +41,7 @@ public class Parser {
 
     private void byeMessage(String[] words) {
         if (words.length == 1) {
-            ui.showMessage("Oh, I see how it is. No need to pretend you’ll miss me. Go on, then. Goodbye.");
+            ui.showMessage("Oh, I see how it is. No need to pretend you'll miss me. Go on, then. Goodbye.");
             ui.showMessage("_____________________________________________________________________________");
         } else {
             ui.showMessage("Goodbye...");

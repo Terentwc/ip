@@ -29,12 +29,16 @@ test {
 }
 
 application {
-    mainClass.set("src/main/java/Krunch/Krunch.java")
+    mainClass.set("Krunch.Krunch")
 }
 
 shadowJar {
     archiveBaseName = "krunch"
     archiveClassifier = null
+
+    manifest {
+        attributes 'Main-Class': "Krunch.Krunch"
+    }
 }
 
 run{
