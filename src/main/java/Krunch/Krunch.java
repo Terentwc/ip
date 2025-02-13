@@ -17,13 +17,14 @@ public class Krunch {
      *
      * @throws IllegalException if there is an error while loading tasks
      */
-    public Krunch() throws IllegalException{
+    public Krunch() throws IllegalException {
         taskManager = new TaskManager(TaskLoader.loadTasks());
         ui = new UI();
         parser = new Parser();
     }
 
     // Main
+
     /**
      * The main method that starts the Krunch program.
      * It creates an instance of Krunch and calls the run method to begin handling user input.

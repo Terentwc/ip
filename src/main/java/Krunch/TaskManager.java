@@ -33,37 +33,37 @@ public class TaskManager {
      * Execute a task based on user input.
      * The input is parsed and the appropriate action is performed.
      *
-     * @param words         the split command words from the user input
-     * @param UserInput     the full user input string
+     * @param words     the split command words from the user input
+     * @param UserInput the full user input string
      * @throws IllegalException if an error occurs due to invalid input or task
      */
     public void doTask(String[] words, String UserInput) throws IllegalException {
         switch (words[0]) {
-            case "list":
-                getList();
-                break;
-            case "mark":
-                editMark(words[1], true);
-                break;
-            case "unmark":
-                editMark(words[1], false);
-                break;
-            case "todo":
-                String description = UserInput.substring(words[0].length()).trim();
-                addToDo(description);
-                break;
-            case "deadline":
-                addDeadline(words, UserInput);
-                break;
-            case "event":
-                addEvent(words, UserInput);
-                break;
-            case "delete":
-                deleteTask(words);
-                break;
-            case "find":
-                findTask(words, UserInput);
-                break;
+        case "list":
+            getList();
+            break;
+        case "mark":
+            editMark(words[1], true);
+            break;
+        case "unmark":
+            editMark(words[1], false);
+            break;
+        case "todo":
+            String description = UserInput.substring(words[0].length()).trim();
+            addToDo(description);
+            break;
+        case "deadline":
+            addDeadline(words, UserInput);
+            break;
+        case "event":
+            addEvent(words, UserInput);
+            break;
+        case "delete":
+            deleteTask(words);
+            break;
+        case "find":
+            findTask(words, UserInput);
+            break;
         }
         taskSaver.saveTasks(tasks);
 
@@ -76,7 +76,7 @@ public class TaskManager {
      * @throws IllegalException if there are no tasks to list
      */
     public void getList() throws IllegalException {
-        if (tasks.isEmpty()){
+        if (tasks.isEmpty()) {
             throw new IllegalException("No tasks. Good job");
         }
         for (int i = 1; i <= tasks.size(); i++) {
@@ -135,8 +135,8 @@ public class TaskManager {
     /**
      * Adds a new "Deadline" task to the task list.
      *
-     * @param words      the split command words from the user input
-     * @param UserInput  the full user input string containing the deadline details
+     * @param words     the split command words from the user input
+     * @param UserInput the full user input string containing the deadline details
      * @throws IllegalException if the input is invalid
      */
     private void addDeadline(String[] words, String UserInput) throws IllegalException {
@@ -151,8 +151,8 @@ public class TaskManager {
     /**
      * Adds a new "Event" task to the task list.
      *
-     * @param words      the split command words from the user input
-     * @param UserInput  the full user input string containing the event details
+     * @param words     the split command words from the user input
+     * @param UserInput the full user input string containing the event details
      * @throws IllegalException if the input is invalid
      */
     private void addEvent(String[] words, String UserInput) throws IllegalException {
@@ -202,8 +202,8 @@ public class TaskManager {
     /**
      * Finds tasks that contain a specific keyword in their description.
      *
-     * @param words       the split command words from the user input
-     * @param UserInput   the full user input string containing the keyword
+     * @param words     the split command words from the user input
+     * @param UserInput the full user input string containing the keyword
      * @throws IllegalException if there are no tasks or no matching tasks
      */
     public void findTask(String[] words, String UserInput) throws IllegalException {

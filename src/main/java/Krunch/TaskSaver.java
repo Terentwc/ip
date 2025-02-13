@@ -19,24 +19,6 @@ public class TaskSaver {
     UI ui = new UI();
 
     /**
-     * Saves the list of tasks to a file.
-     * Each task is written to the file in a specific format.
-     *
-     * @param tasks the list of tasks to be saved
-     */
-    public void saveTasks(ArrayList<Task> tasks) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            for (Task task : tasks) {
-                writer.write(taskToString(task));
-                writer.newLine();
-            }
-            // ui.showMessage("Saved task");
-        } catch (IOException e) {
-            ui.showMessage("Error saving tasks");
-        }
-    }
-
-    /**
      * Converts a task object into a string representation that can be saved to a file.
      * The format depends on the type of task (ToDo, Deadline, or Event).
      *
@@ -57,6 +39,24 @@ public class TaskSaver {
                     + " | " + ((Event) task).getFrom() + " | " + ((Event) task).getTo();
         }
         return "";
+    }
+
+    /**
+     * Saves the list of tasks to a file.
+     * Each task is written to the file in a specific format.
+     *
+     * @param tasks the list of tasks to be saved
+     */
+    public void saveTasks(ArrayList<Task> tasks) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (Task task : tasks) {
+                writer.write(taskToString(task));
+                writer.newLine();
+            }
+            // ui.showMessage("Saved task");
+        } catch (IOException e) {
+            ui.showMessage("Error saving tasks");
+        }
     }
 
 }

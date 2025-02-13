@@ -18,7 +18,7 @@ public class Deadline extends Task {
      * If the date format is incorrect, the program will terminate with an error message.
      *
      * @param task the description of the task
-     * @param by the due date of the task in "yyyy-mm-dd" format
+     * @param by   the due date of the task in "yyyy-mm-dd" format
      */
     public Deadline(String task, String by) {
         super(task);

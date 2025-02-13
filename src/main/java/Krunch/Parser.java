@@ -131,7 +131,7 @@ public class Parser {
      * Ensures that a description and deadline date are provided.
      * The deadline should be specified with the "/by" flag.
      *
-     * @param words the parsed input words from the user
+     * @param words     the parsed input words from the user
      * @param UserInput the full user input string
      * @return the input words if the command is valid
      * @throws IllegalException if the command is missing components or is improperly formatted
@@ -162,7 +162,7 @@ public class Parser {
      * Validates the "event" command.
      * Ensures that the event has a description, a "/from" time, and a "/to" time.
      *
-     * @param words the parsed input words from the user
+     * @param words     the parsed input words from the user
      * @param UserInput the full user input string
      * @return the input words if the command is valid
      * @throws IllegalException if the event details are incomplete or improperly formatted

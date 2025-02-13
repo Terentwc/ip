@@ -46,7 +46,7 @@ public class UI {
      * Displays the added task and the current number of tasks in the list.
      *
      * @param added the task that was added
-     * @param size the total number of tasks in the list
+     * @param size  the total number of tasks in the list
      */
     public void addedAcknowledgement(Task added, int size) {
         System.out.println("It is added... anything else?");

@@ -21,11 +21,11 @@ public class TaskLoader {
     /**
      * Loads tasks from the "tasks.txt" file and returns a list of Task objects.
      * The file format should contain task data in the following structure:
-     *
-     *  - T | <done-status> | <task-name>
-     *  - D | <done-status> | <task-name> | <deadline-date>
-     *  - E | <done-status> | <task-name> | <from-date> | <to-date>
-     *
+     * <p>
+     * - T | <done-status> | <task-name>
+     * - D | <done-status> | <task-name> | <deadline-date>
+     * - E | <done-status> | <task-name> | <from-date> | <to-date>
+     * <p>
      * The method will create the corresponding task objects and restore their
      * completion status from the file data.
      *

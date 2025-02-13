@@ -22,7 +22,7 @@ public class Event extends Task {
      *
      * @param task the description of the event
      * @param from the start date of the event in "yyyy-mm-dd" format
-     * @param to the end date of the event in "yyyy-mm-dd" format
+     * @param to   the end date of the event in "yyyy-mm-dd" format
      * @throws IllegalException if the date format is incorrect
      */
     public Event(String task, String from, String to) throws IllegalException {
