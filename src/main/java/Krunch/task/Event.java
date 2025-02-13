@@ -1,5 +1,7 @@
 package Krunch.task;
 
+import Krunch.exceptions.IllegalException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,14 +10,13 @@ public class Event extends Task {
     protected LocalDate from;
     protected LocalDate to;
 
-    public Event(String task, String from, String to) {
+    public Event(String task, String from, String to) throws IllegalException {
         super(task);
         try {
             this.from = LocalDate.parse(from);
             this.to = LocalDate.parse(to);
         } catch (DateTimeParseException e) {
-            System.out.println("Event this!\n I warned you!!");
-            System.exit(1);
+            throw new IllegalException("Wrong format bro... it's this format -> yyyymmdd");
         }
     }
 

@@ -8,7 +8,7 @@ public class Krunch {
     private final Parser parser;
 
 
-    public Krunch() {
+    public Krunch() throws IllegalException{
         taskManager = new TaskManager(TaskLoader.loadTasks());
         ui = new UI();
         parser = new Parser();

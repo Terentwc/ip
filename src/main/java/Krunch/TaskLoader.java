@@ -1,5 +1,6 @@
 package Krunch;
 
+import Krunch.exceptions.IllegalException;
 import Krunch.task.Deadline;
 import Krunch.task.Event;
 import Krunch.task.Task;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 
 public class TaskLoader {
 
-    public static ArrayList<Task> loadTasks() {
+    public static ArrayList<Task> loadTasks() throws IllegalException {
         ArrayList<Task> tasks = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("tasks.txt"))) {
             String line;

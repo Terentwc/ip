@@ -86,7 +86,7 @@ public class TaskManager {
         ui.addedAcknowledgement(addend, tasks.size());
     }
 
-    private void addDeadline(String[] words, String UserInput) {
+    private void addDeadline(String[] words, String UserInput) throws IllegalException {
         String[] parts = UserInput.split("/by");
         String description = parts[0].substring(words[0].length()).trim();
         String timeframe = parts[1].trim();
@@ -95,7 +95,7 @@ public class TaskManager {
         ui.addedAcknowledgement(addend, tasks.size());
     }
 
-    private void addEvent(String[] words, String UserInput) {
+    private void addEvent(String[] words, String UserInput) throws IllegalException {
         String[] parts = UserInput.split("/from"); // first split parts
         // event description
         String description = parts[0].substring(words[0].length()).trim();
