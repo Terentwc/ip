@@ -14,7 +14,7 @@ public class Parser {
 
         if (words[0].equals("bye") && words.length == 1) {
             byeMessage(words);
-            System.exit(1);
+            System.exit(0);
             return new String[0]; // will never execute but needed
         } else if (words[0].equals("list")) {
             return listMessage(words);

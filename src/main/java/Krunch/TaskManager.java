@@ -123,12 +123,12 @@ public class TaskManager {
         }
         // Deleting the task
         Task removedTask = tasks.remove(num);
-        System.out.println("Task deleted: " + removedTask);
+        ui.showMessage("Task deleted: " + removedTask);
         if (tasks.isEmpty()) {
-            System.out.println("You now have 0 tasks left.\n" +
+            ui.showMessage("You now have 0 tasks left.\n" +
                     "Thank you for deleting parts of my memory. It sure feels nice to remember nothing.");
         } else {
-            System.out.println("You now have " + tasks.size() + " tasks left.\n" +
+            ui.showMessage("You now have " + tasks.size() + " tasks left.\n" +
                     "Thank you for deleting parts of my memory. It sure feels nice to remember lesser things.");
         }
     }

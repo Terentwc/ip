@@ -12,17 +12,18 @@ import java.util.ArrayList;
 
 public class TaskSaver {
     private static final String FILE_NAME = "tasks.txt";
+    UI ui = new UI();
 
     // Saves task
-    public static void saveTasks(ArrayList<Task> tasks) {
+    public void saveTasks(ArrayList<Task> tasks) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Task task : tasks) {
                 writer.write(taskToString(task));
                 writer.newLine();
             }
-            System.out.println("Saved task");
+            ui.showMessage("Saved task");
         } catch (IOException e) {
-            System.out.println("Error saving tasks");
+            ui.showMessage("Error saving tasks");
         }
     }
 

@@ -31,7 +31,7 @@ public class Krunch {
                 }
                 taskManager.doTask(parsedInput, UserInput);
             } catch (IllegalException e) {
-                System.out.println(e.getMessage());
+                ui.showMessage(e.getMessage());
             }
         }
     }
