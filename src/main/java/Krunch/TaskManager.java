@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class TaskManager {
     protected ArrayList<Task> tasks;
     UI ui = new UI();
+    TaskSaver taskSaver = new TaskSaver();
 
 
     public TaskManager(ArrayList<Task> tasks) {
@@ -41,11 +42,18 @@ public class TaskManager {
             case "delete":
                 deleteTask(words);
                 break;
+            case "find":
+                findTask(words, UserInput);
+                break;
         }
+        taskSaver.saveTasks(tasks);
 
     }
 
-    public void getList() {
+    public void getList() throws IllegalException {
+        if (tasks.isEmpty()){
+            throw new IllegalException("No tasks. Good job");
+        }
         for (int i = 1; i <= tasks.size(); i++) {
             // 1.[] blah
             ui.showMessage(i + ". " + tasks.get(i - 1));
@@ -130,6 +138,34 @@ public class TaskManager {
         } else {
             ui.showMessage("You now have " + tasks.size() + " tasks left.\n" +
                     "Thank you for deleting parts of my memory. It sure feels nice to remember lesser things.");
+        }
+    }
+
+    public void findTask(String[] words, String UserInput) throws IllegalException {
+        String keyword = UserInput.substring(words[0].length()).trim();
+        ArrayList<Task> matchingtasks = new ArrayList<>();
+
+        ui.showMessage("Please wait as I find the tasks...");
+
+        if (tasks.isEmpty()) {
+            throw new IllegalException("Oh... I found nothing... because there are no tasks!!");
+        }
+
+        for (Task matching : tasks) {
+            if (matching.getTask().contains(keyword)) {
+                matchingtasks.add(matching);
+            }
+        }
+
+        if (matchingtasks.isEmpty()) {
+            ui.showMessage("Hey there, just checked my mind. There are no tasks with " + keyword
+                    + ".\nThanks for waiting while I checked.");
+        }
+
+
+        for (int i = 1; i <= matchingtasks.size(); i++) {
+            // 1.[] blah
+            ui.showMessage(i + ". " + matchingtasks.get(i - 1));
         }
     }
 

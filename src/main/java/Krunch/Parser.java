@@ -30,6 +30,8 @@ public class Parser {
             return parseEvent(words, UserInput);
         } else if (words[0].equals("delete")) {
             return parseDelete(words);
+        } else if (words[0].equals("find")) {
+            return parseFind(words);
         } else if (words[0].isEmpty()) {
             ui.showMessage("W-wha?... h-hey! Don't give me the silent treatment!");
             return new String[0];
@@ -148,6 +150,14 @@ public class Parser {
             throw new IllegalException("Deleting~ Oh wait... Which task do i delete?");
         }
 
+        return words;
+    }
+
+    public String[] parseFind(String[] words) throws IllegalException {
+        if (words.length < 2) {
+            throw new IllegalException("Well... I'm not a mind reader you know?\n" +
+                    " You gotta tell me what you want me to find. Try again.");
+        }
         return words;
     }
 
