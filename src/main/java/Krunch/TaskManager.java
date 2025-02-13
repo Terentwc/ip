@@ -8,16 +8,35 @@ import Krunch.task.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * This class manages the tasks given to the chatbot.
+ * It allows users to add, mark, unmark, list, delete, and find tasks.
+ * Tasks are stored in an ArrayList and can be saved using the TaskSaver.
+ */
+
 public class TaskManager {
     protected ArrayList<Task> tasks;
     UI ui = new UI();
     TaskSaver taskSaver = new TaskSaver();
 
-
+    /**
+     * Constructor for TaskManager.
+     * Initializes the TaskManager with a list of tasks.
+     *
+     * @param tasks the list of tasks to manage
+     */
     public TaskManager(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Execute a task based on user input.
+     * The input is parsed and the appropriate action is performed.
+     *
+     * @param words         the split command words from the user input
+     * @param UserInput     the full user input string
+     * @throws IllegalException if an error occurs due to invalid input or task
+     */
     public void doTask(String[] words, String UserInput) throws IllegalException {
         switch (words[0]) {
             case "list":
@@ -50,6 +69,12 @@ public class TaskManager {
 
     }
 
+    /**
+     * Lists all tasks in the task manager.
+     * Throws an exception if there are no tasks.
+     *
+     * @throws IllegalException if there are no tasks to list
+     */
     public void getList() throws IllegalException {
         if (tasks.isEmpty()){
             throw new IllegalException("No tasks. Good job");
@@ -60,6 +85,13 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Marks or unmarks a task based on the provided task number.
+     *
+     * @param stringNumber the task number to mark/unmark
+     * @param shouldMark   true if the task should be marked, false if it should be unmarked
+     * @throws IllegalException if the task number is invalid or other errors occur
+     */
     public void editMark(String stringNumber, boolean shouldMark) throws IllegalException {
         int listNumber = Integer.parseInt(stringNumber);
         if (tasks.isEmpty()) {
@@ -88,12 +120,25 @@ public class TaskManager {
         ui.showMessage(tasks.get(listNumber).toString());
     }
 
+
+    /**
+     * Adds a new "To Do" task to the task list.
+     *
+     * @param description the description of the "To Do" task
+     */
     private void addToDo(String description) {
         Task addend = new ToDo(description);
         tasks.add(addend);
         ui.addedAcknowledgement(addend, tasks.size());
     }
 
+    /**
+     * Adds a new "Deadline" task to the task list.
+     *
+     * @param words      the split command words from the user input
+     * @param UserInput  the full user input string containing the deadline details
+     * @throws IllegalException if the input is invalid
+     */
     private void addDeadline(String[] words, String UserInput) throws IllegalException {
         String[] parts = UserInput.split("/by");
         String description = parts[0].substring(words[0].length()).trim();
@@ -103,6 +148,13 @@ public class TaskManager {
         ui.addedAcknowledgement(addend, tasks.size());
     }
 
+    /**
+     * Adds a new "Event" task to the task list.
+     *
+     * @param words      the split command words from the user input
+     * @param UserInput  the full user input string containing the event details
+     * @throws IllegalException if the input is invalid
+     */
     private void addEvent(String[] words, String UserInput) throws IllegalException {
         String[] parts = UserInput.split("/from"); // first split parts
         // event description
@@ -120,6 +172,12 @@ public class TaskManager {
         ui.addedAcknowledgement(addend, tasks.size());
     }
 
+    /**
+     * Deletes a task based on the task number provided by the user.
+     *
+     * @param words the split command words from the user input
+     * @throws IllegalException if the task number is invalid or there are no tasks to delete
+     */
     private void deleteTask(String[] words) throws IllegalException {
         if (tasks.isEmpty()) {
             throw new IllegalException("Oh... And what do you want to delete? My memory is empty.\n" +
@@ -141,6 +199,13 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Finds tasks that contain a specific keyword in their description.
+     *
+     * @param words       the split command words from the user input
+     * @param UserInput   the full user input string containing the keyword
+     * @throws IllegalException if there are no tasks or no matching tasks
+     */
     public void findTask(String[] words, String UserInput) throws IllegalException {
         String keyword = UserInput.substring(words[0].length()).trim();
         ArrayList<Task> matchingtasks = new ArrayList<>();
@@ -161,7 +226,6 @@ public class TaskManager {
             ui.showMessage("Hey there, just checked my mind. There are no tasks with " + keyword
                     + ".\nThanks for waiting while I checked.");
         }
-
 
         for (int i = 1; i <= matchingtasks.size(); i++) {
             // 1.[] blah

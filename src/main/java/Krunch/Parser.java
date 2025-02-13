@@ -1,20 +1,30 @@
-/**
- * Parser is
- */
 package Krunch;
 
 import Krunch.exceptions.IllegalException;
 
-
+/**
+ * The Parser class is responsible for parsing and validating user input commands.
+ * It processes commands related to tasks such as marking, unmarking, deleting,
+ * adding, and finding tasks. It ensures that user input is correctly formatted
+ * and returns the appropriate response or throws exceptions if the input is invalid.
+ */
 public class Parser {
     UI ui = new UI();
 
+    /**
+     * Parses the user input and determines the appropriate command to execute.
+     * It validates the input and returns the parsed information or throws an exception
+     * if the input is invalid.
+     *
+     * @param UserInput the full user input string
+     * @return an array of strings containing parsed command details
+     * @throws IllegalException if the user input is invalid or improperly formatted
+     */
     public String[] parsedInfo(String UserInput) throws IllegalException {
         String[] words = UserInput.split(" ");
 
-        if (words[0].equals("bye") && words.length == 1) {
+        if (words[0].startsWith("bye") && words.length == 1) {
             byeMessage(words);
-            System.exit(0);
             return new String[0]; // will never execute but needed
         } else if (words[0].equals("list")) {
             return listMessage(words);
@@ -41,16 +51,32 @@ public class Parser {
         }
     }
 
+    /**
+     * Displays a goodbye message based on the user's input.
+     * If the user just types "bye", a formal farewell is shown before exiting.
+     * Otherwise, a cheeky message is displayed if there are extra words.
+     *
+     * @param words the parsed input words from the user
+     */
     private void byeMessage(String[] words) {
-        if (words.length == 1) {
+        if (words.length == 1 && words[0].equals("bye")) {
             ui.showMessage("Oh, I see how it is. No need to pretend you'll miss me. Go on, then. Goodbye.");
             ui.showMessage("_____________________________________________________________________________");
+            System.exit(0);
         } else {
             ui.showMessage("Goodbye...");
             ui.showMessage("You can't get rid of me that easily! >:)");
         }
     }
 
+    /**
+     * Validates the "list" command. If the command is not correctly formatted,
+     * an exception is thrown.
+     *
+     * @param words the parsed input words from the user
+     * @return the input words if the command is valid
+     * @throws IllegalException if the command is invalid
+     */
     private String[] listMessage(String[] words) throws IllegalException {
         if (words.length == 1) {
             // return "list"
@@ -60,6 +86,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Validates the "mark" and "unmark" commands.
+     * Checks that a valid task number is provided.
+     *
+     * @param words the parsed input words from the user
+     * @return the input words if the command is valid
+     * @throws IllegalException if the command is invalid or the task number is missing/incorrect
+     */
     private String[] parseMark(String[] words) throws IllegalException {
         String word = words[0];
         if (words.length != 2) {
@@ -77,6 +111,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Validates the "todo" command.
+     * Ensures that a description is provided for the "ToDo" task.
+     *
+     * @param words the parsed input words from the user
+     * @return the input words if the command is valid
+     * @throws IllegalException if the command is missing a description
+     */
     private String[] parseToDo(String[] words) throws IllegalException {
         if (words.length < 2) {
             throw new IllegalException("Hey hey, tli man... Give me something to work with.");
@@ -84,6 +126,16 @@ public class Parser {
         return words;
     }
 
+    /**
+     * Validates the "deadline" command.
+     * Ensures that a description and deadline date are provided.
+     * The deadline should be specified with the "/by" flag.
+     *
+     * @param words the parsed input words from the user
+     * @param UserInput the full user input string
+     * @return the input words if the command is valid
+     * @throws IllegalException if the command is missing components or is improperly formatted
+     */
     private String[] parseDeadline(String[] words, String UserInput) throws IllegalException {
         if (words.length < 2) {
             throw new IllegalException("Yes...? You seem to be missing... a description.\n"
@@ -106,6 +158,15 @@ public class Parser {
         return words;
     }
 
+    /**
+     * Validates the "event" command.
+     * Ensures that the event has a description, a "/from" time, and a "/to" time.
+     *
+     * @param words the parsed input words from the user
+     * @param UserInput the full user input string
+     * @return the input words if the command is valid
+     * @throws IllegalException if the event details are incomplete or improperly formatted
+     */
     private String[] parseEvent(String[] words, String UserInput) throws IllegalException {
 
         if (words.length <= 1) {
@@ -139,6 +200,14 @@ public class Parser {
         return words;
     }
 
+    /**
+     * Validates the "delete" command.
+     * Ensures that a task number is provided to delete a task.
+     *
+     * @param words the parsed input words from the user
+     * @return the input words if the command is valid
+     * @throws IllegalException if the command is missing the task number or the task number is invalid
+     */
     public String[] parseDelete(String[] words) throws IllegalException {
         if (words.length != 2) {
             throw new IllegalException("Alright. What task do you want to delete?\n" +
@@ -153,6 +222,14 @@ public class Parser {
         return words;
     }
 
+    /**
+     * Validates the "find" command.
+     * Ensures that a keyword is provided to search for tasks.
+     *
+     * @param words the parsed input words from the user
+     * @return the input words if the command is valid
+     * @throws IllegalException if the command is missing a keyword
+     */
     public String[] parseFind(String[] words) throws IllegalException {
         if (words.length < 2) {
             throw new IllegalException("Well... I'm not a mind reader you know?\n" +
