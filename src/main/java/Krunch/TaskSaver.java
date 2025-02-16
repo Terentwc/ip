@@ -53,7 +53,6 @@ public class TaskSaver {
                 writer.write(taskToString(task));
                 writer.newLine();
             }
-            // ui.showMessage("Saved task");
         } catch (IOException e) {
             ui.showMessage("Error saving tasks");
         }

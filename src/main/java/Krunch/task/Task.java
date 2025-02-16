@@ -6,7 +6,7 @@ package Krunch.task;
  */
 public class Task {
     protected String task;
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Constructs a new Task with the given description.
@@ -16,7 +16,7 @@ public class Task {
      */
     public Task(String task) {
         this.task = task;
-        this.done = false; // initialise task as not done
+        this.isDone = false; // initialise task as not done
     }
 
     /**
@@ -26,7 +26,7 @@ public class Task {
      * @return the string representing the completion status ("X" if done, " " if not done)
      */
     public String stringDone() {
-        return done ? "X" : " ";
+        return isDone ? "X" : " ";
     }
 
     /**
@@ -34,7 +34,7 @@ public class Task {
      * If the task is done, it will be marked as not done, and vice versa.
      */
     public void toggleDone() {
-        this.done = !this.done;
+        this.isDone = !this.isDone;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Task {
      * @return true if the task is done, false otherwise
      */
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**

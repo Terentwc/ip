@@ -12,15 +12,12 @@ public class UI {
      * Displays initial messages about the program's functionality and requirements.
      */
     public void greet() {
-        System.out.println("_____________________________________________________________________________");
+        System.out.println("____________________________________________________________________________________________");
         System.out.println("Oh, what a treat. Finally, you've graced me with your presence.");
-        //Ask
-        System.out.println("Name's Krunch. So, what mighty task are we tackling today?");
-        System.out.println("_____________________________________________________________________________");
-
-        System.out.println("By the way, event and deadline requires a format of yyyy-mm-dd");
-        System.out.println("I'll be unhappy and leave if you give it to me any other way!");
-        System.out.println("_____________________________________________________________________________");
+        System.out.println("Name's Krunch. In case you didn't already figure that out.");
+        System.out.println("So, what mighty task are we tackling today? Just don't expect me to do everything for you..."
+                + "\nBut I guess I can help, if I have to.");
+        System.out.println("____________________________________________________________________________________________");
     }
 
     /**

@@ -23,7 +23,7 @@ public class Parser {
     public String[] parsedInfo(String UserInput) throws IllegalException {
         String[] words = UserInput.split(" ");
 
-        if (words[0].startsWith("bye") && words.length == 1) {
+        if (words[0].startsWith("bye")) {
             byeMessage(words);
             return new String[0]; // will never execute but needed
         } else if (words[0].equals("list")) {
