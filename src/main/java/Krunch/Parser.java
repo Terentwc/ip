@@ -43,11 +43,9 @@ public class Parser {
         } else if (words[0].equals("find")) {
             return parseFind(words);
         } else if (words[0].isEmpty()) {
-            ui.showMessage("W-wha?... h-hey! Don't give me the silent treatment!");
-            return new String[0];
+            throw new IllegalException("W-wha?... h-hey! Don't give me the silent treatment!");
         } else {
-            ui.showMessage(UserInput);
-            return new String[0];
+            throw new IllegalException(UserInput);
         }
     }
 
@@ -58,14 +56,16 @@ public class Parser {
      *
      * @param words the parsed input words from the user
      */
-    private void byeMessage(String[] words) {
+    private String byeMessage(String[] words) {
+        String response = "";
         if (words.length == 1 && words[0].equals("bye")) {
             ui.showMessage("Oh, I see how it is. No need to pretend you'll miss me. Go on, then. Goodbye.");
             System.exit(0);
         } else {
-            ui.showMessage("Goodbye...");
-            ui.showMessage("You can't get rid of me that easily! >:)");
+            response = "Goodbye...\n"
+                    + "You can't get rid of me that easily! >:)";
         }
+        return response;
     }
 
     /**
