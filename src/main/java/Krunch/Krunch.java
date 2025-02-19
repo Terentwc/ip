@@ -65,4 +65,14 @@ public class Krunch {
             }
         }
     }
+
+    public String getResponse(String input) {
+        try {
+            String[] parsedInput = parser.parsedInfo(input);
+            return taskManager.doTask(parsedInput, input);
+        } catch (IllegalException e) {
+            return e.getMessage();
+        }
+    }
+
 }

@@ -11,13 +11,11 @@ public class UI {
      * Greets the user and introduces the program.
      * Displays initial messages about the program's functionality and requirements.
      */
-    public void greet() {
-        System.out.println("____________________________________________________________________________________________");
-        System.out.println("Oh, what a treat. Finally, you've graced me with your presence.");
-        System.out.println("Name's Krunch. In case you didn't already figure that out.");
-        System.out.println("So, what mighty task are we tackling today? Just don't expect me to do everything for you..."
-                + "\nBut I guess I can help, if I have to.");
-        System.out.println("____________________________________________________________________________________________");
+    public String greet() {
+        return "Oh, what a treat. Finally, you've graced me with your presence.\n"
+                + "Name's Krunch. In case you didn't already figure that out.\n"
+                + "So, what mighty task are we tackling today? Just don't expect me to do everything for you...\n"
+                + "But I guess I can help, if I have to.\n";
     }
 
     /**
@@ -34,8 +32,8 @@ public class UI {
      *
      * @param message the message to be displayed to the user
      */
-    public void showMessage(String message) {
-        System.out.println(message);
+    public String showMessage(String message) {
+        return message;
     }
 
     /**
@@ -45,9 +43,9 @@ public class UI {
      * @param added the task that was added
      * @param size  the total number of tasks in the list
      */
-    public void addedAcknowledgement(Task added, int size) {
-        System.out.println("It is added... anything else?");
-        System.out.println(added);
-        System.out.println("In case you wanted to know, you have " + size + " tasks in the list.");
+    public String addedAcknowledgement(Task added, int size) {
+        return "It is added... anything else?\n"
+                + added + "\n"
+                + "In case you wanted to know, you have " + size + " tasks in the list.\n";
     }
 }

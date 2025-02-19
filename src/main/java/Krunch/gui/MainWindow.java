@@ -8,6 +8,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import Krunch.Krunch;
+import Krunch.exceptions.IllegalException;
+import Krunch.UI;
+
 /**
  * Controller for the main GUI.
  */
@@ -21,7 +25,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    //private Duke duke;
+    private Krunch krunch;
+    private UI ui = new UI();
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -34,8 +40,8 @@ public class MainWindow extends AnchorPane {
     /**
      * Injects the Duke instance
      */
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setKrunch(Krunch k) {
+        krunch = k;
     }
 
     /**
@@ -45,7 +51,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = krunch.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

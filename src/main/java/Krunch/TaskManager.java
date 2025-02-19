@@ -37,52 +37,56 @@ public class TaskManager {
      * @param UserInput the full user input string
      * @throws IllegalException if an error occurs due to invalid input or task
      */
-    public void doTask(String[] words, String UserInput) throws IllegalException {
+    public String doTask(String[] words, String UserInput) throws IllegalException {
+        String response = "";
         switch (words[0]) {
         case "list":
-            getList();
+            response = getList();
             break;
-        case "mark":
-            editMark(words[1], true);
-            break;
-        case "unmark":
-            editMark(words[1], false);
-            break;
-        case "todo":
-            String description = UserInput.substring(words[0].length()).trim();
-            addToDo(description);
-            break;
-        case "deadline":
-            addDeadline(words, UserInput);
-            break;
-        case "event":
-            addEvent(words, UserInput);
-            break;
-        case "delete":
-            deleteTask(words);
-            break;
-        case "find":
-            findTask(words, UserInput);
-            break;
+//        case "mark":
+//            response = editMark(words[1], true);
+//            break;
+//        case "unmark":
+//            response = editMark(words[1], false);
+//            break;
+//        case "todo":
+//            String description = UserInput.substring(words[0].length()).trim();
+//            response = addToDo(description);
+//            break;
+//        case "deadline":
+//            response = addDeadline(words, UserInput);
+//            break;
+//        case "event":
+//            response = addEvent(words, UserInput);
+//            break;
+//        case "delete":
+//            response = deleteTask(words);
+//            break;
+//        case "find":
+//            response = findTask(words, UserInput);
+//            break;
         }
         taskSaver.saveTasks(tasks);
-
+        return response;
     }
 
     /**
      * Lists all tasks in the task manager.
      * Throws an exception if there are no tasks.
      *
+     * @return
      * @throws IllegalException if there are no tasks to list
      */
-    public void getList() throws IllegalException {
+    public String getList() throws IllegalException {
         if (tasks.isEmpty()) {
             throw new IllegalException("No tasks. Good job");
         }
+        StringBuilder response = new StringBuilder();
         for (int i = 1; i <= tasks.size(); i++) {
             // 1.[] blah
-            ui.showMessage(i + ". " + tasks.get(i - 1));
+            response.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
+        return response.toString();
     }
 
     /**
