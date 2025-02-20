@@ -21,6 +21,7 @@ public class Parser {
      * @throws IllegalException if the user input is invalid or improperly formatted
      */
     public String[] parsedInfo(String UserInput) throws IllegalException {
+        assert UserInput != null : "User input should never be null";
         String[] words = UserInput.split(" ");
 
         if (words[0].startsWith("bye")) {
