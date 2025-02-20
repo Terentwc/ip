@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final UI ui = new UI();
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -26,7 +27,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     //private Duke duke;
     private Krunch krunch;
-    private final UI ui = new UI();
 
     @FXML
     public void initialize() {

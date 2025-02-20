@@ -98,37 +98,34 @@ public class TaskManager {
      */
     public String editMark(String stringNumber, boolean shouldMark) throws IllegalException {
         int listNumber = Integer.parseInt(stringNumber);
-        StringBuilder response = new StringBuilder();
         if (tasks.isEmpty()) {
             throw new IllegalException("Oh you ain't getting me this time!\n" +
                     "Psst! Make a task first! Don't tell anyone I told you this!");
         }
         // imaginary list number
-        if (listNumber >= tasks.size()) {
-            if (shouldMark) {
-                throw new IllegalException("Marking imaginary task as done! Aren't I sooo... helpful?\n");
-            } else {
-                throw new IllegalException("You couldn't even do an imaginary task? Quickly! Start on it!");
-            }
+        if (listNumber > tasks.size()) {
+            throw new IllegalException(shouldMark
+                    ? "Marking imaginary task as done! Aren't I sooo... helpful?\n"
+                    : "You couldn't even do an imaginary task? Quickly! Start on it!"
+            );
         }
+
+        Task task = tasks.get(listNumber - 1);
         // checking if task is done
-        if (tasks.get(listNumber - 1).isDone()) {
-            // changing to mark
-            if (!shouldMark) {
-                response.append("Hm... alright. It is unmarked.\n");
-            } else {
+        if (task.isDone()) {
+            if (shouldMark) {
                 throw new IllegalException("Hey, hey. You marked this already!");
             }
-        } else { //changing to marked
-            if (!shouldMark) {
-                throw new IllegalException("So... when are you going to start exactly?");
-            } else {
-                response.append("Nice job. You deserve a praise... but not from me.\n");
-            }
+            task.toggleDone();
+            return "Hm... alright. It is unmarked.\n" + task;
         }
-        tasks.get(listNumber - 1).toggleDone();
-        // printing status
-        return response.append(tasks.get(listNumber - 1).toString()).toString();
+
+        if (!shouldMark) {
+            throw new IllegalException("So... when are you going to start exactly?");
+        }
+
+        task.toggleDone();
+        return "Nice job. You deserve a praise... but not from me.\n" + task;
     }
 
 
@@ -222,10 +219,11 @@ public class TaskManager {
         String keyword = UserInput.substring(words[0].length()).trim();
         ArrayList<Task> matchingtasks = new ArrayList<>();
         // Initialising response and message
-        StringBuilder response = new StringBuilder("Please wait as I find the tasks...");
+        StringBuilder response = new StringBuilder("Please wait as I find the tasks...\n");
 
         if (tasks.isEmpty()) {
             response.append("Oh... I found nothing... because there are no tasks!!");
+            return response.toString();
         }
 
         for (Task matching : tasks) {
@@ -237,6 +235,7 @@ public class TaskManager {
         if (matchingtasks.isEmpty()) {
             response.append("Hey there, just checked my mind. There are no tasks with " + keyword
                     + ".\nThanks for waiting while I checked.");
+            return response.toString();
         }
 
         for (int i = 1; i <= matchingtasks.size(); i++) {

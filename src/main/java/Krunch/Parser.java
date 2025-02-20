@@ -57,7 +57,7 @@ public class Parser {
      *
      * @param words the parsed input words from the user
      */
-    private String byeMessage(String[] words) throws IllegalException{
+    private String byeMessage(String[] words) throws IllegalException {
         String response = "";
         if (words.length == 1 && words[0].equals("bye")) {
             ui.showMessage("Oh, I see how it is. No need to pretend you'll miss me. Go on, then. Goodbye.");
@@ -99,15 +99,14 @@ public class Parser {
         if (words.length != 2) {
             throw new IllegalException("Alright. It is" + word + "ed... What did you want to " + word + " exactly?\n"
                     + "Come on, do it like this. " + word + " (task number). It's just that easy");
-        } else {
-            // calls to edit list
-            try {
-                // test if words[1] is an integer
-                Integer.parseInt(words[1]);
-                return words;
-            } catch (NumberFormatException e) {
-                throw new IllegalException("Ah... It has to be a number. (E.g. " + word + " 1)");
-            }
+        }
+        // calls to edit list
+        try {
+            // test if words[1] is an integer
+            Integer.parseInt(words[1]);
+            return words;
+        } catch (NumberFormatException e) {
+            throw new IllegalException("Ah... It has to be a number. (E.g. " + word + " 1)");
         }
     }
 
