@@ -201,7 +201,7 @@ public class TaskManager {
         }
         // Deleting the task
         Task removedTask = tasks.remove(num);
-        response.append("Task deleted: " + removedTask +"\n");
+        response.append("Task deleted: " + removedTask + "\n");
         if (tasks.isEmpty()) {
             response.append("You now have 0 tasks left.\n" +
                     "Thank you for deleting parts of my memory. It sure feels nice to remember nothing.");

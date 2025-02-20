@@ -1,5 +1,7 @@
 package Krunch.gui;
 
+import Krunch.Krunch;
+import Krunch.exceptions.IllegalException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,16 +10,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import Krunch.Krunch;
-import Krunch.exceptions.IllegalException;
-
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
 
     //private final Duke duke = new Duke();
-    private Krunch krunch = new Krunch();
+    private final Krunch krunch = new Krunch();
 
     public Main() throws IllegalException {
     }

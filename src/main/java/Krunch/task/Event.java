@@ -31,7 +31,7 @@ public class Event extends Task {
             this.from = LocalDate.parse(from);
             this.to = LocalDate.parse(to);
         } catch (DateTimeParseException e) {
-            throw new IllegalException("Wrong format bro... it's this format -> yyyymmdd");
+            throw new IllegalException("Wrong format bro... it's this format -> yyyy-mm-dd");
         }
     }
 

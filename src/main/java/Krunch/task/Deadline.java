@@ -1,5 +1,7 @@
 package Krunch.task;
 
+import Krunch.exceptions.IllegalException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -20,13 +22,12 @@ public class Deadline extends Task {
      * @param task the description of the task
      * @param by   the due date of the task in "yyyy-mm-dd" format
      */
-    public Deadline(String task, String by) {
+    public Deadline(String task, String by) throws IllegalException {
         super(task);
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            System.out.println("Deadline this!\n" + "I warned you!!");
-            System.exit(1);
+            throw new IllegalException("No!\n... I guess you can try again... use this format next time yyyy-mm-dd");
         }
     }
 
