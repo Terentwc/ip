@@ -11,6 +11,7 @@ Welcome to **Krunch**, a task management chatbot designed to help you stay on to
 5. [Task Types](#task-types)
 6. [Graphical User Interface (GUI)](#graphical-user-interface-gui)
 7. [Saving and Loading Tasks](#saving-and-loading-tasks)
+8. [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -146,3 +147,7 @@ Krunch automates task saving and loading so your tasks persist between runs:
 ---
 
 Happy task managing with **Krunch!** 😊
+
+---
+### Acknowledgements
+- IntelliJ's AI Assistant helped in doing this User Guide's format and polished the details of it.
