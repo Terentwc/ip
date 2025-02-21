@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Krunch using FXML.
  */
 public class Main extends Application {
 
@@ -28,6 +28,7 @@ public class Main extends Application {
             stage.setMinWidth(417);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            stage.setTitle("Krunch");
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setKrunch(krunch);  // inject the Duke instance
