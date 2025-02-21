@@ -240,7 +240,7 @@ public class TaskManager {
 
         for (int i = 1; i <= matchingtasks.size(); i++) {
             // 1.[] blah
-            response.append(i + ". " + matchingtasks.get(i - 1));
+            response.append(i + ". " + matchingtasks.get(i - 1) + "\n");
         }
         return response.toString();
     }

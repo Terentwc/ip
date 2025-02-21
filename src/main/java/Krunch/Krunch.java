@@ -38,11 +38,15 @@ public class Krunch {
     }
 
     /**
-     * Runs the Krunch program. This method greets the user, enters an infinite loop to process user input,
-     * and handles the commands using the TaskManager, Parser, and UI classes.
-     * It continues to run until the program is closed.
+     * Executes the main logic of the Krunch program.
+     * This method continuously listens for and processes user commands until the program is terminated.
+     * It performs the following steps in a loop:
+     * - Greets the user at the start of the session.
+     * - Reads and parses the user input.
+     * - If the input is valid, executes the corresponding task using the TaskManager.
+     * - If an error occurs during parsing or task execution, displays an error message to the user.
      *
-     * @throws IllegalException if there is an error during task processing
+     * @throws IllegalException if an illegal operation occurs, such as invalid input or a failure in task execution.
      */
     public void run() throws IllegalException {
         ui.greet();
@@ -66,6 +70,14 @@ public class Krunch {
         }
     }
 
+    /**
+     * Processes the input command provided by the user and generates the corresponding response.
+     * This method parses the input string, determines the appropriate task to perform,
+     * and returns the result or error message, if applicable.
+     *
+     * @param input the command string entered by the user
+     * @return the result of executing the command, or an error message if something goes wrong
+     */
     public String getResponse(String input) {
         try {
             String[] parsedInput = parser.parsedInfo(input);

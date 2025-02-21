@@ -3,22 +3,22 @@ package Krunch;
 import Krunch.exceptions.IllegalException;
 
 /**
- * The Parser class is responsible for parsing and validating user input commands.
- * It processes commands related to tasks such as marking, unmarking, deleting,
- * adding, and finding tasks. It ensures that user input is correctly formatted
- * and returns the appropriate response or throws exceptions if the input is invalid.
+ * The Parser class is responsible for parsing user input and determining the appropriate
+ * actions or commands that need to be executed based on the input. It validates user
+ * input, ensures correct formatting, and throws exceptions for invalid inputs. The
+ * class incorporates methods for handling a variety of commands that the user may input.
  */
 public class Parser {
     UI ui = new UI();
 
     /**
-     * Parses the user input and determines the appropriate command to execute.
-     * It validates the input and returns the parsed information or throws an exception
-     * if the input is invalid.
+     * Parses the user's input and determines its type based on predefined commands.
+     * Depending on the input, the appropriate method for processing that command is executed.
+     * Throws an exception if the input does not match any expected command or is improperly formatted.
      *
-     * @param UserInput the full user input string
-     * @return an array of strings containing parsed command details
-     * @throws IllegalException if the user input is invalid or improperly formatted
+     * @param UserInput the complete string entered by the user
+     * @return an array of strings containing the parsed input words if the command is recognized and valid
+     * @throws IllegalException if the input is null, unrecognized, improperly formatted, or missing required data
      */
     public String[] parsedInfo(String UserInput) throws IllegalException {
         assert UserInput != null : "User input should never be null";
@@ -51,11 +51,13 @@ public class Parser {
     }
 
     /**
-     * Displays a goodbye message based on the user's input.
-     * If the user just types "bye", a formal farewell is shown before exiting.
-     * Otherwise, a cheeky message is displayed if there are extra words.
+     * Processes a "bye" command from the user and performs necessary actions based on the input.
+     * If the input contains only the word "bye", the program exits after displaying a farewell message.
+     * Otherwise, an exception is thrown indicating the inability to exit.
      *
      * @param words the parsed input words from the user
+     * @return an empty string since execution ends with the system exit or an exception is thrown
+     * @throws IllegalException if the input does not contain only the word "bye"
      */
     private String byeMessage(String[] words) throws IllegalException {
         String response = "";
@@ -70,12 +72,12 @@ public class Parser {
     }
 
     /**
-     * Validates the "list" command. If the command is not correctly formatted,
-     * an exception is thrown.
+     * Processes the "list" command by returning the input words if valid.
+     * If the command is invalid, an exception is thrown with an appropriate message.
      *
      * @param words the parsed input words from the user
-     * @return the input words if the command is valid
-     * @throws IllegalException if the command is invalid
+     * @return an array of strings containing the input words if the command is valid
+     * @throws IllegalException if the input does not match the expected format of the "list" command
      */
     private String[] listMessage(String[] words) throws IllegalException {
         if (words.length == 1) {
@@ -87,12 +89,15 @@ public class Parser {
     }
 
     /**
-     * Validates the "mark" and "unmark" commands.
-     * Checks that a valid task number is provided.
+     * Validates and parses the "mark" command from the user's input.
+     * Ensures the command format has exactly two components: the command keyword
+     * and a task number. The task number must be a valid integer.
      *
-     * @param words the parsed input words from the user
-     * @return the input words if the command is valid
-     * @throws IllegalException if the command is invalid or the task number is missing/incorrect
+     * @param words the parsed input words from the user; expected to consist of
+     *              the "mark" command and a task number
+     * @return an array of strings containing the validated command and task number
+     * @throws IllegalException if the number of components in the input is not
+     *                          exactly two or if the task number is not a valid integer
      */
     private String[] parseMark(String[] words) throws IllegalException {
         String word = words[0];
